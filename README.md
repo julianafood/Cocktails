@@ -4,7 +4,5 @@ This web application is a one-stop shop for quickly throwing a party. The web ap
 
 ## Specifications
 * Uses Cocktail DB and Spotify APis 
-* 
-*
-*
+* Uses local storage to store previously entered inputs
 *
