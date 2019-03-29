@@ -18,7 +18,7 @@ What is the primary goal of the product?
 To solve the question to the average drinker to make a drink with the products they readily have at hand.
 
 Identify and prioritize essential user stories (limit this to 3 or fewer)?
-*Logging in the ingredients of the inputs
-*Getting the output of the drinks to be made
-*Getting music to pair with the drink
-*Getting trivia of the cocktail
+* Logging in the ingredients of the inputs
+* Getting the output of the drinks to be made
+* Getting music to pair with the drink
+* Getting trivia of the cocktail
