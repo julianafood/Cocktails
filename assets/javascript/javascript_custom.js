@@ -1,6 +1,7 @@
-var APIKey = "166a433c57516f51dfab1f7edaed8413";
+var selectedIngredients = ["Aperol"];
+var APIKey = "8673533";
 // Here we are building the URL we need to query the database
-var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Dry_Vermouth";
+var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
 // Here we run our AJAX call to the OpenWeatherMap API
 $.ajax({
   url: queryURL,
@@ -17,6 +18,7 @@ $.ajax({
     for (var i = 0; i < results.length; i++) {
         // Creating and storing a div tag
         var drinkThumbnailDiv = $("<div>");
+        drinkThumbnailDiv.addClass("card");
         // Creating an h3 tag with the result item's name
         var h3 = $("<h3>").text(results[i].strDrink);
         // Creating and storing an image tag
