@@ -98,7 +98,7 @@ $.ajax({
         event.preventDefault();
 
         // This line grabs the value from the clicked ingredient
-        var ingredient = $(this).val();
+        var ingredient = $(this).text();
 
         // Adding ingredient from the textbox to our array
         ingredients.push(ingredient);
