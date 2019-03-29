@@ -1,3 +1,5 @@
+$(document).ready(function () {
+
 var selectedIngredients = ["Aperol"];
 var APIKey = "8673533";
 // Here we are building the URL we need to query the database
@@ -43,3 +45,71 @@ $.ajax({
     // console.log("Humidity: " + response.main.humidity);
     // console.log("Temperature (F): " + response.main.temp);
   });
+
+  
+    //  ----- Search Menu Section 
+
+    $("#mySearch").on("keyup", searchFunction);
+
+    function searchFunction() {
+        // Declare variables
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("mySearch");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myMenu");
+        li = ul.getElementsByTagName("li");
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    // Function for displaying selected ingredients
+    var ingredients = [];
+
+    function renderButtons() {
+
+        // this is necessary otherwise you will have repeat buttons
+        $("#buttons-view").empty();
+
+        // Looping through the array of ingredients
+        for (var i = 0; i < ingredients.length; i++) {
+
+            // Then dynamicaly generating buttons for each ingredient in the array
+            var a = $("<button>");
+            // Adding a data-attribute
+            a.attr("data-name", ingredients[i]);
+            // Providing the initial button text
+            a.text(ingredients[i]);
+            // Adding the button to the buttons-view div
+            $("#buttons-view").append(a);
+        }
+    }
+
+    // This function handles events where an ingredient button is clicked
+    $(".ingred").on("click", function(event) {
+
+        event.preventDefault();
+
+        // This line grabs the value from the clicked ingredient
+        var ingredient = $(this).val();
+
+        // Adding ingredient from the textbox to our array
+        ingredients.push(ingredient);
+
+        // Calling renderButtons which handles the processing of our ingredients array
+        renderButtons();
+    });
+
+});
+
+
+
+
+
