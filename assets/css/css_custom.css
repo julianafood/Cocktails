@@ -1,5 +1,5 @@
 
-/* Style the search box */
+/* Style for the search box */
 #mySearch {
     width: 100%;
     font-size: 18px;
@@ -7,14 +7,14 @@
     border: 1px solid #ddd;
   }
   
-  /* Style the navigation menu */
+  /* Style for the search bar navigation menu */
   #ingredMenu {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
   
-  /* Style the navigation links */
+  /* Style for the search bar navigation links */
   #ingredMenu li a {
     background-color: #f6f6f6;
     padding: 12px;
@@ -28,4 +28,8 @@
     background-color: #eee;
   }
 
-
+  
+  /* Style for the buttons */
+  #ingredButton {
+    margin: 6px;
+  }
