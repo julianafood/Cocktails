@@ -106,7 +106,8 @@ $(document).ready(function () {
         }
     }
 
-    // Function for displaying selected ingredients
+    // ----- Render Ingredient Button Section 
+
     var ingredients = [];
 
     function renderButtons() {
@@ -121,6 +122,8 @@ $(document).ready(function () {
             var a = $("<button>");
             // Adding a data-attribute
             a.attr("data-name", ingredients[i]);
+             // Adding a data-attribute
+             a.attr("id", "ingredButton");
             // Providing the initial button text
             a.text(ingredients[i]);
             // Adding the button to the buttons-view div
@@ -144,8 +147,20 @@ $(document).ready(function () {
     });
 
 
+    // ----- Remove Ingredient Button Section
+   
+    function removeButtons(){
+        $(this).remove();
 
+        var indexValue = $(this).attr("data-name");
+        var index = ingredients.indexOf(indexValue);
+     
+        if (index > -1) {
+           ingredients.splice(index, 1);
+        }
+    };
 
+    $(document).on("click", "#ingredButton", removeButtons);
 
 });
 
