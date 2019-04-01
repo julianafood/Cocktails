@@ -1,8 +1,13 @@
 $(document).ready(function () {
 
-    var selectedIngredients = ["Aperol"];
+    var ingredients = [];
+    var selectedIngredients = ingredients;
+    var selectedDrinkId = "";
     var APIKey = "8673533";
-    // Here we are building the URL we need to query the database
+    
+    
+    $("#submit").on("click", function() {
+          // Here we are building the URL we need to query the database
     var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
     // Here we run our AJAX call to the OpenWeatherMap API
     $.ajax({
@@ -26,6 +31,7 @@ $(document).ready(function () {
                 // Creating and storing an image tag
                 var drinkThumbnailImage = $("<img>");
                 drinkThumbnailImage.addClass("thumbnailImage");
+                drinkThumbnailImage.attr("drinkID", results[i].idDrink);
                 // Setting the src attribute of the image to a property pulled off the result item
                 drinkThumbnailImage.attr("src", results[i].strDrinkThumb);
                 console.log(drinkThumbnailImage);
@@ -35,16 +41,97 @@ $(document).ready(function () {
                 // Prependng the emotionDiv to the HTML page in the "#gif-output" div
                 $("#drink-output").append(drinkThumbnailDiv);
             }
-            // // Transfer content to HTML
-            // $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-            // $(".wind").text("Wind Speed: " + response.wind.speed);
-            // $(".humidity").text("Humidity: " + response.main.humidity);
-            // $(".temp").text("Temperature (F) " + response.main.temp);
-            // // Log the data in the console as well
-            // console.log("Wind Speed: " + response.wind.speed);
-            // console.log("Humidity: " + response.main.humidity);
-            // console.log("Temperature (F): " + response.main.temp);
+
+            $(".thumbnailImage").on("click", function() {
+              // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+              //var state = $(this).attr("data-state");
+              console.log("working");
+        
+              $("#exampleModal").modal("show");
+        
+              selectedDrinkId = $(this).attr("drinkID");
+              console.log(selectedDrinkId);
+        
+              openDrinkInfo();
+        
+            });
         });
+    });
+
+
+        function openDrinkInfo() {
+          var querySecondURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/lookup.php?i=" + selectedDrinkId;
+          $("#ModalLabel").empty();
+          $("#imageDiv").empty();
+          $("#ingredientsList").empty();
+          $("#spotifyPlay").empty();
+          $("#drinkInstructions").empty();
+          $.ajax({
+              url: querySecondURL,
+              method: "GET"
+          })
+          // We store all of the retrieved data inside of an object called "response"
+          .then(function(response) {
+              // Log the queryURL
+              console.log(querySecondURL);
+              // Log the resulting object
+              console.log(response);
+              var results = response.drinks;
+    
+              var drinkModalDiv = $("<div>");
+              drinkModalDiv.addClass("modal-body");
+    
+              var modalContent = $("<div>");
+              modalContent.addClass("modal-content");
+    
+              var drinkInstructions = $("<div>");
+    
+              var drinkName = $("<h3>").text(results[0].strDrink);
+              var glassType = $("<h5>").text(results[0].strGlass);
+              var instructions = $("<p>").text(results[0].strInstructions);
+    
+              var ingredients1 = $("<p>").text(results[0].strIngredient1);
+              var ingredients2 = $("<p>").text(results[0].strIngredient2);
+              var ingredients3 = $("<p>").text(results[0].strIngredient3);
+    
+              var measure1 = $("<p>").text(results[0].strMeasure1);
+              var measure2 = $("<p>").text(results[0].strMeasure2);
+              var measure3 = $("<p>").text(results[0].strMeasure3);
+              
+              var drinkModalImage = $("<img>");
+              drinkModalImage.attr("src", results[0].strDrinkThumb);
+              drinkModalImage.attr("width", "100%");
+    
+              ingredients1.prepend(measure1);
+              ingredients2.prepend(measure2);
+              ingredients3.prepend(measure3);
+    
+              //modalContent.append(drinkName);
+              modalContent.append(glassType);
+              modalContent.append(ingredients1);
+              modalContent.append(ingredients2);
+              modalContent.append(ingredients3);
+              //modalContent.append(drinkModalImage);
+              
+              drinkInstructions.append(instructions);
+              //The header for the modal
+              $("#ModalLabel").append(drinkName);
+              //Appending the image to the image div section of the modal
+              $("#imageDiv").append(drinkModalImage);
+              //Appending the ingredients list (glass type and indredients and their respective quantities)
+              $("#ingredientsList").append(modalContent);
+              //appending the drink instructions to the respective section div of the modal
+              $("#drinkInstructions").append(drinkInstructions);
+    
+              console.log(drinkModalDiv);
+              console.log($("#modal-info"));
+    
+    
+    
+          });
+    
+      }
+    
 
 
 
@@ -108,7 +195,7 @@ $(document).ready(function () {
 
     // ----- Render Ingredient Button Section 
 
-    var ingredients = [];
+
 
     function renderButtons() {
 
