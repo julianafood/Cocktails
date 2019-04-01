@@ -7,6 +7,7 @@ $(document).ready(function () {
     
     
     $("#submit").on("click", function() {
+      $("#drink-output").empty();
           // Here we are building the URL we need to query the database
     var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
     // Here we run our AJAX call to the OpenWeatherMap API
