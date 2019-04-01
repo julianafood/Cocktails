@@ -90,30 +90,35 @@ $(document).ready(function () {
               var drinkInstructions = $("<div>");
     
               var drinkName = $("<h3>").text(results[0].strDrink);
-              var glassType = $("<h5>").text(results[0].strGlass);
+              var glassType = $("<p>").text("Glass Type: " + results[0].strGlass);
               var instructions = $("<p>").text(results[0].strInstructions);
     
-              var ingredients1 = $("<p>").text(results[0].strIngredient1);
-              var ingredients2 = $("<p>").text(results[0].strIngredient2);
-              var ingredients3 = $("<p>").text(results[0].strIngredient3);
-    
-              var measure1 = $("<p>").text(results[0].strMeasure1);
-              var measure2 = $("<p>").text(results[0].strMeasure2);
-              var measure3 = $("<p>").text(results[0].strMeasure3);
+              var ingredients1 = $("<p>").text(results[0].strMeasure1 + " " + results[0].strIngredient1);
+              var ingredients2 = $("<p>").text(results[0].strMeasure2 + " " + results[0].strIngredient2);
+              var ingredients3 = $("<p>").text(results[0].strMeasure3 + " " + results[0].strIngredient3);
+              var ingredients4 = $("<p>").text(results[0].strMeasure4 + " " + results[0].strIngredient4);
+              var ingredients5 = $("<p>").text(results[0].strMeasure5 + " " + results[0].strIngredient5);
+              var ingredients6 = $("<p>").text(results[0].strMeasure6 + " " + results[0].strIngredient6);
+              var ingredients7 = $("<p>").text(results[0].strMeasure7 + " " + results[0].strIngredient7);
+              var ingredients8 = $("<p>").text(results[0].strMeasure8 + " " + results[0].strIngredient8);
+              var ingredients9 = $("<p>").text(results[0].strMeasure9 + " " + results[0].strIngredient9);
+              var ingredients10 = $("<p>").text(results[0].strMeasure10 + " " + results[0].strIngredient10);
               
               var drinkModalImage = $("<img>");
               drinkModalImage.attr("src", results[0].strDrinkThumb);
               drinkModalImage.attr("width", "100%");
-    
-              ingredients1.prepend(measure1);
-              ingredients2.prepend(measure2);
-              ingredients3.prepend(measure3);
-    
-              //modalContent.append(drinkName);
+
               modalContent.append(glassType);
               modalContent.append(ingredients1);
               modalContent.append(ingredients2);
               modalContent.append(ingredients3);
+              modalContent.append(ingredients4);
+              modalContent.append(ingredients5);
+              modalContent.append(ingredients6);
+              modalContent.append(ingredients7);
+              modalContent.append(ingredients8);
+              modalContent.append(ingredients9);
+              modalContent.append(ingredients10);
               //modalContent.append(drinkModalImage);
               
               drinkInstructions.append(instructions);
