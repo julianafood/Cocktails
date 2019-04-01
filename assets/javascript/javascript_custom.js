@@ -4,137 +4,176 @@ $(document).ready(function () {
     var selectedIngredients = ingredients;
     var selectedDrinkId = "";
     var APIKey = "8673533";
-    
-    
-    $("#submit").on("click", function() {
-      $("#drink-output").empty();
-          // Here we are building the URL we need to query the database
-    var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
-    // Here we run our AJAX call to the OpenWeatherMap API
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-        // We store all of the retrieved data inside of an object called "response"
-        .then(function (response) {
-            // Log the queryURL
-            console.log(queryURL);
-            // Log the resulting object
-            console.log(response);
-            //console.log(response.drinks[0]);
-            var results = response.drinks;
-            for (var i = 0; i < results.length; i++) {
-                // Creating and storing a div tag
-                var drinkThumbnailDiv = $("<div>");
-                drinkThumbnailDiv.addClass("card");
-                // Creating an h3 tag with the result item's name
-                var h3 = $("<h3>").text(results[i].strDrink);
-                // Creating and storing an image tag
-                var drinkThumbnailImage = $("<img>");
-                drinkThumbnailImage.addClass("thumbnailImage");
-                drinkThumbnailImage.attr("drinkID", results[i].idDrink);
-                // Setting the src attribute of the image to a property pulled off the result item
-                drinkThumbnailImage.attr("src", results[i].strDrinkThumb);
-                console.log(drinkThumbnailImage);
-                // Appending the paragraph and image tag to the emotionDiv
-                drinkThumbnailDiv.append(h3);
-                drinkThumbnailDiv.append(drinkThumbnailImage);
-                // Prependng the emotionDiv to the HTML page in the "#gif-output" div
-                $("#drink-output").append(drinkThumbnailDiv);
-            }
+
+
+    $("#submit").on("click", function () {
+        $("#drink-output").empty();
+        // Here we are building the URL we need to query the database
+        var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
+        // Here we run our AJAX call to the OpenWeatherMap API
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            // We store all of the retrieved data inside of an object called "response"
+            .then(function (response) {
+                // Log the queryURL
+                console.log(queryURL);
+                // Log the resulting object
+                console.log(response);
+                //console.log(response.drinks[0]);
+                var results = response.drinks;
+                for (var i = 0; i < results.length; i++) {
+                    // Creating and storing a div tag
+                    var drinkThumbnailDiv = $("<div>");
+                    drinkThumbnailDiv.addClass("card");
+                    // Creating an h3 tag with the result item's name
+                    var h3 = $("<h3>").text(results[i].strDrink);
+                    // Creating and storing an image tag
+                    var drinkThumbnailImage = $("<img>");
+                    drinkThumbnailImage.addClass("thumbnailImage");
+                    drinkThumbnailImage.attr("drinkID", results[i].idDrink);
+                    // Setting the src attribute of the image to a property pulled off the result item
+                    drinkThumbnailImage.attr("src", results[i].strDrinkThumb);
+                    console.log(drinkThumbnailImage);
+                    // Appending the paragraph and image tag to the emotionDiv
+                    drinkThumbnailDiv.append(h3);
+                    drinkThumbnailDiv.append(drinkThumbnailImage);
+                    // Prependng the emotionDiv to the HTML page in the "#gif-output" div
+                    $("#drink-output").append(drinkThumbnailDiv);
+                }
 
 
 
-            $(".thumbnailImage").on("click", function() {
-              // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-              //var state = $(this).attr("data-state");
-              console.log("working");
-        
-              $("#exampleModal").modal("show");
-        
-              selectedDrinkId = $(this).attr("drinkID");
-              console.log(selectedDrinkId);
-        
-              openDrinkInfo();
-        
+                $(".thumbnailImage").on("click", function () {
+                    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                    //var state = $(this).attr("data-state");
+                    console.log("working");
+
+                    $("#exampleModal").modal("show");
+
+                    selectedDrinkId = $(this).attr("drinkID");
+                    console.log(selectedDrinkId);
+
+                    openDrinkInfo();
+
+                });
             });
-        });
     });
 
 
-        function openDrinkInfo() {
-          var querySecondURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/lookup.php?i=" + selectedDrinkId;
-          $("#ModalLabel").empty();
-          $("#imageDiv").empty();
-          $("#ingredientsList").empty();
-          $("#spotifyPlay").empty();
-          $("#drinkInstructions").empty();
-          $.ajax({
-              url: querySecondURL,
-              method: "GET"
-          })
-          // We store all of the retrieved data inside of an object called "response"
-          .then(function(response) {
-              // Log the queryURL
-              console.log(querySecondURL);
-              // Log the resulting object
-              console.log(response);
-              var results = response.drinks;
-    
-              var drinkModalDiv = $("<div>");
-              drinkModalDiv.addClass("modal-body");
-    
-              var modalContent = $("<div>");
-              modalContent.addClass("modal-content");
-    
-              var drinkInstructions = $("<div>");
-    
-              var drinkName = $("<h3>").text(results[0].strDrink);
-              var glassType = $("<h5>").text(results[0].strGlass);
-              var instructions = $("<p>").text(results[0].strInstructions);
-    
-              var ingredients1 = $("<p>").text(results[0].strIngredient1);
-              var ingredients2 = $("<p>").text(results[0].strIngredient2);
-              var ingredients3 = $("<p>").text(results[0].strIngredient3);
-    
-              var measure1 = $("<p>").text(results[0].strMeasure1);
-              var measure2 = $("<p>").text(results[0].strMeasure2);
-              var measure3 = $("<p>").text(results[0].strMeasure3);
-              
-              var drinkModalImage = $("<img>");
-              drinkModalImage.attr("src", results[0].strDrinkThumb);
-              drinkModalImage.attr("width", "100%");
-    
-              ingredients1.prepend(measure1);
-              ingredients2.prepend(measure2);
-              ingredients3.prepend(measure3);
-    
-              //modalContent.append(drinkName);
-              modalContent.append(glassType);
-              modalContent.append(ingredients1);
-              modalContent.append(ingredients2);
-              modalContent.append(ingredients3);
-              //modalContent.append(drinkModalImage);
-              
-              drinkInstructions.append(instructions);
-              //The header for the modal
-              $("#ModalLabel").append(drinkName);
-              //Appending the image to the image div section of the modal
-              $("#imageDiv").append(drinkModalImage);
-              //Appending the ingredients list (glass type and indredients and their respective quantities)
-              $("#ingredientsList").append(modalContent);
-              //appending the drink instructions to the respective section div of the modal
-              $("#drinkInstructions").append(drinkInstructions);
-    
-              console.log(drinkModalDiv);
-              console.log($("#modal-info"));
-    
-    
-    
-          });
-    
-      }
-    
+    function openDrinkInfo() {
+        var querySecondURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/lookup.php?i=" + selectedDrinkId;
+        $("#ModalLabel").empty();
+        $("#imageDiv").empty();
+        $("#ingredientsList").empty();
+        $("#spotifyPlay").empty();
+        $("#drinkInstructions").empty();
+        $.ajax({
+            url: querySecondURL,
+            method: "GET"
+        })
+            // We store all of the retrieved data inside of an object called "response"
+            .then(function (response) {
+                // Log the queryURL
+                console.log(querySecondURL);
+                // Log the resulting object
+                console.log(response);
+                var results = response.drinks;
+
+                var drinkModalDiv = $("<div>");
+                drinkModalDiv.addClass("modal-body");
+
+                var modalContent = $("<div>");
+                modalContent.addClass("modal-content");
+
+                var drinkInstructions = $("<div>");
+
+                var drinkName = $("<h3>").text(results[0].strDrink);
+                var glassType = $("<h5>").text(results[0].strGlass);
+                var instructions = $("<p>").text(results[0].strInstructions);
+
+                var ingredients1 = $("<p>").text(results[0].strIngredient1);
+                var ingredients2 = $("<p>").text(results[0].strIngredient2);
+                var ingredients3 = $("<p>").text(results[0].strIngredient3);
+
+                var measure1 = $("<p>").text(results[0].strMeasure1);
+                var measure2 = $("<p>").text(results[0].strMeasure2);
+                var measure3 = $("<p>").text(results[0].strMeasure3);
+
+                var drinkModalImage = $("<img>");
+                drinkModalImage.attr("src", results[0].strDrinkThumb);
+                drinkModalImage.attr("width", "100%");
+
+                ingredients1.prepend(measure1);
+                ingredients2.prepend(measure2);
+                ingredients3.prepend(measure3);
+
+                //modalContent.append(drinkName);
+                modalContent.append(glassType);
+                modalContent.append(ingredients1);
+                modalContent.append(ingredients2);
+                modalContent.append(ingredients3);
+
+
+                // Section to add dynamically add spotify url to modal
+                console.log(results[0].strIngredient1);
+                console.log(results[0].strIngredient2);
+                console.log(results[0].strIngredient3);
+                if ((results[0].strIngredient1 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky")) || (results[0].strIngredient2 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky")) || (results[0].strIngredient3 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky"))){
+                    console.log("country music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
+                }
+                else if ((results[0].strIngredient1 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka")) || (results[0].strIngredient2 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka")) || (results[0].strIngredient3 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka"))) {
+                    console.log("russian music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
+                }
+                else if ((results[0].strIngredient1 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum"|| "Rum" || "Spiced rum" || "White Rum")) || (results[0].strIngredient2 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum"|| "Rum" || "Spiced rum" || "White Rum")) || (results[0].strIngredient3 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum"|| "Rum" || "Spiced rum" || "White Rum"))) {
+                    console.log("reggae music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
+                }
+                else if (((results[0].strIngredient1) == ("Tequila")) || ((results[0].strIngredient2) == ("Tequila")) || ((results[0].strIngredient3) == ("Tequila"))){
+                    console.log("latin music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
+                }
+                else if (((results[0].strIngredient1) == ("Gin")) || ((results[0].strIngredient2) == ("Gin")) || ((results[0].strIngredient3) == ("Gin"))) {
+                    console.log("jazz music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
+                }
+                else if (((results[0].strIngredient1) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy")) || ((results[0].strIngredient2) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy")) || ((results[0].strIngredient3) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy"))) {
+                    console.log("80's music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
+                }
+                else if (((results[0].strIngredient1) == ("Cachaca")) || ((results[0].strIngredient2) == ("Cachaca")) || ((results[0].strIngredient3) == ("Cachaca"))) {
+                    console.log("samba music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
+                }
+                else {
+                    console.log("throwback music");
+                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX8ky12eWIvcW");
+                };
+
+                //modalContent.append(drinkModalImage);
+
+                drinkInstructions.append(instructions);
+                //The header for the modal
+                $("#ModalLabel").append(drinkName);
+                //Appending the image to the image div section of the modal
+                $("#imageDiv").append(drinkModalImage);
+                //Appending the ingredients list (glass type and indredients and their respective quantities)
+                $("#ingredientsList").append(modalContent);
+                //appending the drink instructions to the respective section div of the modal
+                $("#drinkInstructions").append(drinkInstructions);
+
+                console.log(drinkModalDiv);
+                console.log($("#modal-info"));
+
+
+
+            });
+
+    }
+
 
     // ------ Add ingredients to search menu section /
 
@@ -212,8 +251,8 @@ $(document).ready(function () {
             var a = $("<button>");
             // Adding a data-attribute
             a.attr("data-name", ingredients[i]);
-             // Adding a data-attribute
-             a.attr("id", "ingredButton");
+            // Adding a data-attribute
+            a.attr("id", "ingredButton");
             a.addClass("btn btn-primary");
             // Providing the initial button text
             a.text(ingredients[i]);
@@ -239,15 +278,15 @@ $(document).ready(function () {
 
 
     // ----- Remove Ingredient Button Section
-   
-    function removeButtons(){
+
+    function removeButtons() {
         $(this).remove();
 
         var indexValue = $(this).attr("data-name");
         var index = ingredients.indexOf(indexValue);
-     
+
         if (index > -1) {
-           ingredients.splice(index, 1);
+            ingredients.splice(index, 1);
         }
     };
 

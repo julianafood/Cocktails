@@ -1,12 +1,31 @@
+h1{
+ font-size: 36px;
+}
+
+h2{
+  font-size: 28px;
+}
+
+h3{
+  font-size: 20px;
+}
+
+
+p{
+  font-size: 12px;
+}
+
 
 .card {
   margin: 20px auto;
   padding: 10%;
   width: 100%;
 }
+
 .modal-content{
   padding: 5%;
 }
+
 
 /* Style for the search box */
 #mySearch {
