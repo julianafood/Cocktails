@@ -163,6 +163,7 @@ $(document).ready(function () {
         listItem.html("<a>" + item.strIngredient1 + "</a>");
         listItem.attr("id", "ingredMenu");
         listItem.attr("class", "ingred");
+        listItem.attr("style", "display: none");
         $('#ingredMenu').append(listItem);
     }
 
@@ -171,7 +172,9 @@ $(document).ready(function () {
 
     $("#mySearch").on("keyup", searchFunction);
 
+
     function searchFunction() {
+
 
         // Declare variables
         var input, filter, ul, li, a, i;
@@ -186,7 +189,7 @@ $(document).ready(function () {
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName("a")[0];
             if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
+                li[i].style.display = "block";
             } else {
                 li[i].style.display = "none";
             }
