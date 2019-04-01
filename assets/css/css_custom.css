@@ -1,4 +1,10 @@
 
+.card {
+  margin: 20px auto;
+  padding: 10%;
+  width: 100%;
+}
+
 /* Style for the search box */
 #mySearch {
     width: 100%;
