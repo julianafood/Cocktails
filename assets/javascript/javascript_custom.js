@@ -212,6 +212,7 @@ $(document).ready(function () {
             a.attr("data-name", ingredients[i]);
              // Adding a data-attribute
              a.attr("id", "ingredButton");
+            a.addClass("btn btn-primary");
             // Providing the initial button text
             a.text(ingredients[i]);
             // Adding the button to the buttons-view div
