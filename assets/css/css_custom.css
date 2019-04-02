@@ -1,14 +1,16 @@
 body{
   font-family: 'Germania One', cursive;
   background-color: rgb(129, 255, 129);
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png"); 
 }
 
 h1{
- font-size: 36px;
+ font-size: 48px;
 }
 
 h2{
-  font-size: 30px;
+  font-size: 32px;
+  margin-top: 30px;
 }
 
 h3{
@@ -22,6 +24,7 @@ p{
 
 .column_lime{
   background-color: rgb(129, 255, 129);
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
 }
 
 .column_white{
@@ -55,9 +58,13 @@ p{
 
 /* Style for the search box */
 #jumbotron_heading {
+  /* background-color: cyan; */
+  /* background-image: url(/assets/images/argyle.png); */
+  
+  margin-bottom: 0px;
   background-color: cyan;
   color: salmon;
-  margin-bottom: 0px;
+
 }
 /* Style for the search box */
 #mySearch {
