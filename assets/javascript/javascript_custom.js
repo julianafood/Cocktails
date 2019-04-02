@@ -4,6 +4,7 @@ $(document).ready(function () {
   var selectedIngredients = ingredients;
   var selectedDrinkId = "";
   var APIKey = "8673533";
+  var drinkNameForGiphy = "";
   
   
   $("#submit").on("click", function() {
@@ -92,6 +93,8 @@ $(document).ready(function () {
             var drinkName = $("<h3>").text(results[0].strDrink);
             var glassType = $("<p>").text("Glass Type: " + results[0].strGlass);
             var instructions = $("<p>").text(results[0].strInstructions);
+            // This variable assignment is for use in the drinkGiphy function
+            drinkNameForGiphy = results[0].strDrink;
   
             var ingredients1 = $("<p>").text(results[0].strMeasure1 + " " + results[0].strIngredient1);
             var ingredients2 = $("<p>").text(results[0].strMeasure2 + " " + results[0].strIngredient2);
@@ -134,10 +137,44 @@ $(document).ready(function () {
             console.log(drinkModalDiv);
             console.log($("#modal-info"));
   
-  
-  
+            drinkGiphy();
         });
   
+    }
+
+    function drinkGiphy() {
+
+        $("#drink-giphy").empty();
+
+        var topic = drinkNameForGiphy;
+        
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
+        console.log(topic);
+        console.log(queryURL);
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+        }).then(function(response) {
+
+            //store the reponse data in a variable
+            var results = response.data;
+
+            // console.log test
+            console.log(results);
+
+            // new storage area for the drink Giphy
+            var drinkGiphyDiv = $("<div>");
+
+            // create and store the giphy
+            var drinkTopic = $("<img>");
+            drinkTopic.attr("src", results[0].images.fixed_width.url);
+
+            // append to the new div
+            drinkGiphyDiv.append(drinkTopic);
+
+            $("#drink-giphy").append(drinkGiphyDiv);
+        
+        });   
     }
   
 
