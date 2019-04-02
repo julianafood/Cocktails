@@ -15,6 +15,7 @@ $(document).ready(function () {
 
         // Here we are building the URL we need to query the database
 
+
   var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
   // Here we run our AJAX call to the OpenWeatherMap API
   $.ajax({
@@ -146,9 +147,8 @@ $(document).ready(function () {
                 var drinkInstructions = $("<div>");
 
                 var drinkName = $("<h3>").text(results[0].strDrink);
-                var glassType = $("<p>").text("Glass Type: " + results[0].strGlass);
+                var glassType = $("<p>").text(results[0].strGlass);
                 var instructions = $("<p>").text(results[0].strInstructions);
-
                 var ingredients1 = $("<p>").text(results[0].strMeasure1 + " " + results[0].strIngredient1);
                 var ingredients2 = $("<p>").text(results[0].strMeasure2 + " " + results[0].strIngredient2);
                 var ingredients3 = $("<p>").text(results[0].strMeasure3 + " " + results[0].strIngredient3);
@@ -164,7 +164,13 @@ $(document).ready(function () {
                 drinkModalImage.attr("src", results[0].strDrinkThumb);
                 drinkModalImage.attr("width", "100%");
 
+                var textGlass = $("<h3>");
+                textGlass.html("Drink Glass:");
+                modalContent.append(textGlass);
                 modalContent.append(glassType);
+                var textRecipe = $("<h3>");
+                textRecipe.html("Drink Recipe:");
+                modalContent.append(textRecipe);
                 modalContent.append(ingredients1);
                 modalContent.append(ingredients2);
                 modalContent.append(ingredients3);
@@ -175,48 +181,9 @@ $(document).ready(function () {
                 modalContent.append(ingredients8);
                 modalContent.append(ingredients9);
                 modalContent.append(ingredients10);
+        
+
                 //modalContent.append(drinkModalImage);
-
-                // Section to add dynamically add spotify url to modal
-                console.log(results[0].strIngredient1);
-                console.log(results[0].strIngredient2);
-                console.log(results[0].strIngredient3);
-                if ((results[0].strIngredient1 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky")) || (results[0].strIngredient2 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky")) || (results[0].strIngredient3 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky"))) {
-                    console.log("country music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
-                }
-                else if ((results[0].strIngredient1 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka")) || (results[0].strIngredient2 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka")) || (results[0].strIngredient3 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka"))) {
-                    console.log("russian music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
-                }
-                else if ((results[0].strIngredient1 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum" || "Rum" || "Spiced rum" || "White Rum")) || (results[0].strIngredient2 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum" || "Rum" || "Spiced rum" || "White Rum")) || (results[0].strIngredient3 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum" || "Rum" || "Spiced rum" || "White Rum"))) {
-                    console.log("reggae music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
-                }
-                else if (((results[0].strIngredient1) == ("Tequila")) || ((results[0].strIngredient2) == ("Tequila")) || ((results[0].strIngredient3) == ("Tequila"))) {
-                    console.log("latin music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
-                }
-                else if (((results[0].strIngredient1) == ("Gin")) || ((results[0].strIngredient2) == ("Gin")) || ((results[0].strIngredient3) == ("Gin"))) {
-                    console.log("jazz music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
-                }
-                else if (((results[0].strIngredient1) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy")) || ((results[0].strIngredient2) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy")) || ((results[0].strIngredient3) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy"))) {
-                    console.log("80's music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
-                }
-                else if (((results[0].strIngredient1) == ("Cachaca")) || ((results[0].strIngredient2) == ("Cachaca")) || ((results[0].strIngredient3) == ("Cachaca"))) {
-                    console.log("samba music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
-                }
-                else {
-                    console.log("throwback music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX8ky12eWIvcW");
-                };
-
-
-
-
                 drinkInstructions.append(instructions);
                 //The header for the modal
                 $("#ModalLabel").append(drinkName);
@@ -225,73 +192,299 @@ $(document).ready(function () {
                 //Appending the ingredients list (glass type and indredients and their respective quantities)
                 $("#ingredientsList").append(modalContent);
                 //appending the drink instructions to the respective section div of the modal
+                var instructionText = $("<h3>");
+                instructionText.html("Drink Instructions:");
+                $("#drinkInstructions").append(instructionText);
                 $("#drinkInstructions").append(drinkInstructions);
+
+
+                drinkGiphy();
+
+
+                // Section to add dynamically add spotify url to modal
+                console.log(results[0].strIngredient1);
+                console.log(results[0].strIngredient2);
+                console.log(results[0].strIngredient3);
+                console.log(results[0].strIngredient4);
+                console.log(results[0].strIngredient5);
+
+
+                switch (results[0].strIngredient1.trim()) {
+                    case ("Bourbon"):
+                    case ("Blended whiskey"):
+                    case ("Rye whisky"):
+                    case ("Whiskey"):
+                    case ("Whisky"):
+                    case ("151 proof rum"):
+                        console.log("country music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
+                        break;
+                    case ("Absolut Vodka"):
+                    case ("Vodka"):
+                        console.log("russian music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
+                        break;
+                    case ("Coconut rum"):
+                    case ("Light rum"):
+                    case ("Malibu rum"):
+                    case ("Rum"):
+                    case ("Spiced rum"):
+                    case ("White Rum"):
+                        console.log("reggae music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
+                        break;
+                    case ("Tequila"):
+                    case ("Mezcal"):
+                    case ("Dark rum"):
+                    case ("Añejo rum"):
+                        console.log("latin music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
+                        break;
+                    case ("Gin"):
+                    case ("Blended Scotch"):
+                    case ("Scotch"):
+                    case ("Champagne"):
+                    case ("Cognac"):
+                        console.log("jazz music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
+                        break;
+                    case ("Apple brandy"):
+                    case ("Apricot brandy"):
+                    case ("Blackberry brandy"):
+                    case ("Brandy"):
+                    case ("Cherry brandy"):
+                    case ("Cranberry vodka"):
+                    case ("Lemon vodka"):
+                    case ("Peach vodka"):
+                    case ("Raspberry vodka"):
+                    case ("Vanilla vodka"):
+                    case ("Absolut Citron"):
+                    case ("Absolut Kurant"):
+                    case ("Amaretto"):
+                    case ("Bacardi Limon"):
+                    case ("Blue Curacao"):
+                        console.log("80's music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
+                        break;
+                    case ("Cachaca"):
+                        console.log("samba music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
+                        break;
+                    default:
+                        console.log("1st round no match");
+                        secondIteration();
+                };
+
+                function secondIteration() {
+                    switch (results[0].strIngredient2) {
+                        case ("Bourbon"):
+                        case ("Blended whiskey"):
+                        case ("Rye whisky"):
+                        case ("Whiskey"):
+                        case ("Whisky"):
+                        case ("151 proof rum"):
+                            console.log("country music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
+                            break;
+                        case ("Absolut Vodka"):
+                        case ("Vodka"):
+                            console.log("russian music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
+                            break;
+                        case ("Coconut rum"):
+                        case ("Light rum"):
+                        case ("Malibu rum"):
+                        case ("Rum"):
+                        case ("Spiced rum"):
+                        case ("White Rum"):
+                            console.log("reggae music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
+                            break;
+                        case ("Tequila"):
+                        case ("Mezcal"):
+                        case ("Dark rum"):
+                        case ("Añejo rum"):
+                            console.log("latin music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
+                            break;
+                        case ("Gin"):
+                        case ("Blended Scotch"):
+                        case ("Scotch"):
+                        case ("Champagne"):
+                        case ("Cognac"):
+                            console.log("jazz music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
+                            break;
+                        case ("Apple brandy"):
+                        case ("Apricot brandy"):
+                        case ("Blackberry brandy"):
+                        case ("Brandy"):
+                        case ("Cherry brandy"):
+                        case ("Cranberry vodka"):
+                        case ("Lemon vodka"):
+                        case ("Peach vodka"):
+                        case ("Raspberry vodka"):
+                        case ("Vanilla vodka"):
+                        case ("Absolut Citron"):
+                        case ("Absolut Kurant"):
+                        case ("Amaretto"):
+                        case ("Bacardi Limon"):
+                        case ("Blue Curacao"):
+                            console.log("80's music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
+                            break;
+                        case ("Cachaca"):
+                            console.log("samba music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
+                            break;
+                        default:
+                            console.log("2nd round no match");
+                            thirdIteration();
+                    };
+
+                };
+
+                function thirdIteration() {
+                    switch (results[0].strIngredient3) {
+                        case ("Bourbon"):
+                        case ("Blended whiskey"):
+                        case ("Rye whisky"):
+                        case ("Whiskey"):
+                        case ("Whisky"):
+                        case ("151 proof rum"):
+                            console.log("country music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
+                            break;
+                        case ("Absolut Vodka"):
+                        case ("Vodka"):
+                            console.log("russian music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
+                            break;
+                        case ("Coconut rum"):
+                        case ("Light rum"):
+                        case ("Malibu rum"):
+                        case ("Rum"):
+                        case ("Spiced rum"):
+                        case ("White Rum"):
+                            console.log("reggae music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
+                            break;
+                        case ("Tequila"):
+                        case ("Mezcal"):
+                        case ("Dark rum"):
+                        case ("Añejo rum"):
+                            console.log("latin music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
+                            break;
+                        case ("Gin"):
+                        case ("Blended Scotch"):
+                        case ("Scotch"):
+                        case ("Champagne"):
+                        case ("Cognac"):
+                            console.log("jazz music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
+                            break;
+                        case ("Apple brandy"):
+                        case ("Apricot brandy"):
+                        case ("Blackberry brandy"):
+                        case ("Brandy"):
+                        case ("Cherry brandy"):
+                        case ("Cranberry vodka"):
+                        case ("Lemon vodka"):
+                        case ("Peach vodka"):
+                        case ("Raspberry vodka"):
+                        case ("Vanilla vodka"):
+                        case ("Absolut Citron"):
+                        case ("Absolut Kurant"):
+                        case ("Amaretto"):
+                        case ("Bacardi Limon"):
+                        case ("Blue Curacao"):
+                            console.log("80's music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
+                            break;
+                        case ("Cachaca"):
+                            console.log("samba music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
+                            break;
+                        default:
+                            console.log("3rd round no match");
+                            console.log("throwback music");
+                            $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX8ky12eWIvcW");
+                    };
+
+                };
+
+
+                // Drink GIF section 
+                function drinkGiphy() {
+
+                    $("#drink-giphy").empty();
+        
+                    var topic = results[0].strDrink;
+                    console.log(topic);
+        
+                    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
+                    console.log(topic);
+                    console.log(queryURL);
+                    $.ajax({
+                        url: queryURL,
+                        method: "GET"
+                    }).then(function (response) {
+        
+                        //store the reponse data in a variable
+                        var results = response.data;
+        
+                        // console.log test
+                        console.log(results);
+        
+                        // new storage area for the drink Giphy
+                        var drinkGiphyDiv = $("<div>");
+        
+                        // create and store the giphy
+                        var drinkTopic = $("<img>");
+                        drinkTopic.attr("src", results[0].images.fixed_width.url);
+        
+                        // append to the new div
+                        drinkGiphyDiv.append(drinkTopic);
+        
+                        $("#drink-giphy").append(drinkGiphyDiv);
+                        console.log("fuck you");
+                    });
+                                          
+                };
 
                 drinkGiphy();
 
             });
 
-      }
-                  
-       function drinkGiphy() {
+};
 
-          $("#drink-giphy").empty();
-
-          var topic = drinkNameForGiphy;
-
-          var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
-          console.log(topic);
-          console.log(queryURL);
-          $.ajax({
-          url: queryURL,
-          method: "GET"
-          }).then(function(response) {
-
-            //store the reponse data in a variable
-            var results = response.data;
-
-            // console.log test
-            console.log(results);
-
-            // new storage area for the drink Giphy
-            var drinkGiphyDiv = $("<div>");
-
-            // create and store the giphy
-            var drinkTopic = $("<img>");
-            drinkTopic.attr("src", results[0].images.fixed_width.url);
-
-            // append to the new div
-            drinkGiphyDiv.append(drinkTopic);
-
-            $("#drink-giphy").append(drinkGiphyDiv);
-        
-        }); 
-  }
 
 
 
 
     // ------ Add ingredients to search menu section /
 
-    var dataJSON = '[{"strIngredient1": "Light rum"}, { "strIngredient1": "Applejack" }, { "strIngredient1": "Gin" }, { "strIngredient1": "Dark rum" }, { "strIngredient1": "Sweet Vermouth" }, { "strIngredient1": "Strawberry schnapps" }, { "strIngredient1": "Scotch" }, { "strIngredient1": "Apricot brandy" }, { "strIngredient1": "Triple sec" }, { "strIngredient1": "Southern Comfort" }, { "strIngredient1": "Orange bitters" }, { "strIngredient1": "Brandy" }, { "strIngredient1": "Lemon vodka" }, { "strIngredient1": "Blended whiskey" }, { "strIngredient1": "Dry Vermouth" }, { "strIngredient1": "Amaretto" }, { "strIngredient1": "Tea" }, { "strIngredient1": "Champagne" }, { "strIngredient1": "Coffee liqueur" }, { "strIngredient1": "Bourbon" }, { "strIngredient1": "Tequila" }, { "strIngredient1": "Vodka" }, { "strIngredient1": "Añejo rum" }, { "strIngredient1": "Bitters" }, { "strIngredient1": "Sugar" }, { "strIngredient1": "Kahlua" }, { "strIngredient1": "demerara Sugar" }, { "strIngredient1": "Dubonnet Rouge" }, { "strIngredient1": "Lime juice" }, { "strIngredient1": "Irish whiskey" }, { "strIngredient1": "Apple brandy" }, { "strIngredient1": "Carbonated water" }, { "strIngredient1": "Cherry brandy" }, { "strIngredient1": "Creme de Cacao" }, { "strIngredient1": "Grenadine" }, { "strIngredient1": "Port" }, { "strIngredient1": "Coffee brandy" }, { "strIngredient1": "Red wine" }, { "strIngredient1": "Rum" }, { "strIngredient1": "Grapefruit juice" }, { "strIngredient1": "Ricard" }, { "strIngredient1": "Sherry" }, { "strIngredient1": "Cognac" }, { "strIngredient1": "Sloe gin" }, { "strIngredient1": "Apple juice" }, { "strIngredient1": "Pineapple juice" }, { "strIngredient1": "Lemon juice" }, { "strIngredient1": "Sugar syrup" }, { "strIngredient1": "Milk" }, { "strIngredient1": "Strawberries" }, { "strIngredient1": "Chocolate syrup" }, { "strIngredient1": "Yoghurt" }, { "strIngredient1": "Mango" }, { "strIngredient1": "Ginger" }, { "strIngredient1": "Lime" }, { "strIngredient1": "Cantaloupe" }, { "strIngredient1": "Berries" }, { "strIngredient1": "Grapes" }, { "strIngredient1": "Kiwi" }, { "strIngredient1": "Tomato juice" }, { "strIngredient1": "Cocoa powder" }, { "strIngredient1": "Chocolate" }, { "strIngredient1": "Heavy cream" }, { "strIngredient1": "Galliano" }, { "strIngredient1": "Peach Vodka" }, { "strIngredient1": "Ouzo" }, { "strIngredient1": "Coffee" }, { "strIngredient1": "Spiced rum" }, { "strIngredient1": "Water" }, { "strIngredient1": "Espresso" }, { "strIngredient1": "Angelica root" }, { "strIngredient1": "Orange" }, { "strIngredient1": "Cranberries" }, { "strIngredient1": "Johnnie Walker" }, { "strIngredient1": "Apple cider" }, { "strIngredient1": "Everclear" }, { "strIngredient1": "Cranberry juice" }, { "strIngredient1": "Egg yolk" }, { "strIngredient1": "Egg" }, { "strIngredient1": "Grape juice" }, { "strIngredient1": "Peach nectar" }, { "strIngredient1": "Lemon" }, { "strIngredient1": "Firewater" }, { "strIngredient1": "Lemonade" }, { "strIngredient1": "Lager" }, { "strIngredient1": "Whiskey" }, { "strIngredient1": "Absolut Citron" }, { "strIngredient1": "Pisco" }, { "strIngredient1": "Irish cream" }, { "strIngredient1": "Ale" }, { "strIngredient1": "Chocolate liqueur" }, { "strIngredient1": "Midori melon liqueur" }, { "strIngredient1": "Sambuca" }, { "strIngredient1": "Cider" }, { "strIngredient1": "Sprite" }, { "strIngredient1": "7-Up" }, { "strIngredient1": "Blackberry brandy" }, { "strIngredient1": "Peppermint schnapps" }, { "strIngredient1": "Creme de Cassis" }, { "strIngredient1": "Jack Daniels" }, { "strIngredient1": "Baileys irish cream" }, { "strIngredient1": "151 proof rum" }, { "strIngredient1": "Absolut Vodka" }, { "strIngredient1": "Goldschlager" }, { "strIngredient1": "Crown Royal" }, { "strIngredient1": "Cointreau" }, { "strIngredient1": "Vermouth" }, { "strIngredient1": "Advocaat" }, { "strIngredient1": "Absolut Kurant" }, { "strIngredient1": "Beer" }, { "strIngredient1": "Kool-Aid" }, { "strIngredient1": "Cherry Heering" }, { "strIngredient1": "White Creme de Menthe" }, { "strIngredient1": "Malibu rum" }, { "strIngredient1": "Vanilla vodka" }, { "strIngredient1": "Jägermeister" }, { "strIngredient1": "Kiwi liqueur" }, { "strIngredient1": "Grand Marnier" }, { "strIngredient1": "Cachaca" }, { "strIngredient1": "Peachtree schnapps" }, { "strIngredient1": "Wild Turkey" }, { "strIngredient1": "Cranberry vodka" }, { "strIngredient1": "Corona" }, { "strIngredient1": "Orange juice" }, { "strIngredient1": "Yukon Jack" }, { "strIngredient1": "Chocolate ice-cream" }, { "strIngredient1": "Coconut rum" }, { "strIngredient1": "Banana liqueur" }, { "strIngredient1": "Black Sambuca" }, { "strIngredient1": "Hot Damn" }, { "strIngredient1": "Mint" }, { "strIngredient1": "Campari" }, { "strIngredient1": "Ice" }, { "strIngredient1": "Sour mix" }, { "strIngredient1": "Absinthe" }, { "strIngredient1": "Whisky" }, { "strIngredient1": "Guinness stout" }, { "strIngredient1": "Vanilla ice-cream" }, { "strIngredient1": "Chambord raspberry liqueur" }, { "strIngredient1": "Jim Beam" }, { "strIngredient1": "Godiva liqueur" }, { "strIngredient1": "Fruit punch" }, { "strIngredient1": "Baileys irish cream" }, { "strIngredient1": "Zima" }, { "strIngredient1": "Blue Curacao" }, { "strIngredient1": "Coca-Cola" }, { "strIngredient1": "Maui" }, { "strIngredient1": "Frangelico" }, { "strIngredient1": "Bacardi Limon" }, { "strIngredient1": "Raspberry vodka" }, { "strIngredient1": "Green Creme de Menthe" }, { "strIngredient1": "Lemon peel" }, { "strIngredient1": "Prosecco" }, { "strIngredient1": "White Rum" }, { "strIngredient1": "Mezcal" }, { "strIngredient1": "Green Chartreuse" }, { "strIngredient1": "Grape Soda" }, { "strIngredient1": "Hot Chocolate" }, { "strIngredient1": "Blended Scotch" }, { "strIngredient1": "Rye whiskey"}]';
+var dataJSON = '[{"strIngredient1": "Light rum"}, { "strIngredient1": "Applejack" }, { "strIngredient1": "Gin" }, { "strIngredient1": "Dark rum" }, { "strIngredient1": "Sweet Vermouth" }, { "strIngredient1": "Strawberry schnapps" }, { "strIngredient1": "Scotch" }, { "strIngredient1": "Apricot brandy" }, { "strIngredient1": "Triple sec" }, { "strIngredient1": "Southern Comfort" }, { "strIngredient1": "Orange bitters" }, { "strIngredient1": "Brandy" }, { "strIngredient1": "Lemon vodka" }, { "strIngredient1": "Blended whiskey" }, { "strIngredient1": "Dry Vermouth" }, { "strIngredient1": "Amaretto" }, { "strIngredient1": "Tea" }, { "strIngredient1": "Champagne" }, { "strIngredient1": "Coffee liqueur" }, { "strIngredient1": "Bourbon" }, { "strIngredient1": "Tequila" }, { "strIngredient1": "Vodka" }, { "strIngredient1": "Añejo rum" }, { "strIngredient1": "Bitters" }, { "strIngredient1": "Sugar" }, { "strIngredient1": "Kahlua" }, { "strIngredient1": "demerara Sugar" }, { "strIngredient1": "Dubonnet Rouge" }, { "strIngredient1": "Lime juice" }, { "strIngredient1": "Irish whiskey" }, { "strIngredient1": "Apple brandy" }, { "strIngredient1": "Carbonated water" }, { "strIngredient1": "Cherry brandy" }, { "strIngredient1": "Creme de Cacao" }, { "strIngredient1": "Grenadine" }, { "strIngredient1": "Port" }, { "strIngredient1": "Coffee brandy" }, { "strIngredient1": "Red wine" }, { "strIngredient1": "Rum" }, { "strIngredient1": "Grapefruit juice" }, { "strIngredient1": "Ricard" }, { "strIngredient1": "Sherry" }, { "strIngredient1": "Cognac" }, { "strIngredient1": "Sloe gin" }, { "strIngredient1": "Apple juice" }, { "strIngredient1": "Pineapple juice" }, { "strIngredient1": "Lemon juice" }, { "strIngredient1": "Sugar syrup" }, { "strIngredient1": "Milk" }, { "strIngredient1": "Strawberries" }, { "strIngredient1": "Chocolate syrup" }, { "strIngredient1": "Yoghurt" }, { "strIngredient1": "Mango" }, { "strIngredient1": "Ginger" }, { "strIngredient1": "Lime" }, { "strIngredient1": "Cantaloupe" }, { "strIngredient1": "Berries" }, { "strIngredient1": "Grapes" }, { "strIngredient1": "Kiwi" }, { "strIngredient1": "Tomato juice" }, { "strIngredient1": "Cocoa powder" }, { "strIngredient1": "Chocolate" }, { "strIngredient1": "Heavy cream" }, { "strIngredient1": "Galliano" }, { "strIngredient1": "Peach Vodka" }, { "strIngredient1": "Ouzo" }, { "strIngredient1": "Coffee" }, { "strIngredient1": "Spiced rum" }, { "strIngredient1": "Water" }, { "strIngredient1": "Espresso" }, { "strIngredient1": "Angelica root" }, { "strIngredient1": "Orange" }, { "strIngredient1": "Cranberries" }, { "strIngredient1": "Johnnie Walker" }, { "strIngredient1": "Apple cider" }, { "strIngredient1": "Everclear" }, { "strIngredient1": "Cranberry juice" }, { "strIngredient1": "Egg yolk" }, { "strIngredient1": "Egg" }, { "strIngredient1": "Grape juice" }, { "strIngredient1": "Peach nectar" }, { "strIngredient1": "Lemon" }, { "strIngredient1": "Firewater" }, { "strIngredient1": "Lemonade" }, { "strIngredient1": "Lager" }, { "strIngredient1": "Whiskey" }, { "strIngredient1": "Absolut Citron" }, { "strIngredient1": "Pisco" }, { "strIngredient1": "Irish cream" }, { "strIngredient1": "Ale" }, { "strIngredient1": "Chocolate liqueur" }, { "strIngredient1": "Midori melon liqueur" }, { "strIngredient1": "Sambuca" }, { "strIngredient1": "Cider" }, { "strIngredient1": "Sprite" }, { "strIngredient1": "7-Up" }, { "strIngredient1": "Blackberry brandy" }, { "strIngredient1": "Peppermint schnapps" }, { "strIngredient1": "Creme de Cassis" }, { "strIngredient1": "Jack Daniels" }, { "strIngredient1": "Baileys irish cream" }, { "strIngredient1": "151 proof rum" }, { "strIngredient1": "Absolut Vodka" }, { "strIngredient1": "Goldschlager" }, { "strIngredient1": "Crown Royal" }, { "strIngredient1": "Cointreau" }, { "strIngredient1": "Vermouth" }, { "strIngredient1": "Advocaat" }, { "strIngredient1": "Absolut Kurant" }, { "strIngredient1": "Beer" }, { "strIngredient1": "Kool-Aid" }, { "strIngredient1": "Cherry Heering" }, { "strIngredient1": "White Creme de Menthe" }, { "strIngredient1": "Malibu rum" }, { "strIngredient1": "Vanilla vodka" }, { "strIngredient1": "Jägermeister" }, { "strIngredient1": "Kiwi liqueur" }, { "strIngredient1": "Grand Marnier" }, { "strIngredient1": "Cachaca" }, { "strIngredient1": "Peachtree schnapps" }, { "strIngredient1": "Wild Turkey" }, { "strIngredient1": "Cranberry vodka" }, { "strIngredient1": "Corona" }, { "strIngredient1": "Orange juice" }, { "strIngredient1": "Yukon Jack" }, { "strIngredient1": "Chocolate ice-cream" }, { "strIngredient1": "Coconut rum" }, { "strIngredient1": "Banana liqueur" }, { "strIngredient1": "Black Sambuca" }, { "strIngredient1": "Hot Damn" }, { "strIngredient1": "Mint" }, { "strIngredient1": "Campari" }, { "strIngredient1": "Ice" }, { "strIngredient1": "Sour mix" }, { "strIngredient1": "Absinthe" }, { "strIngredient1": "Whisky" }, { "strIngredient1": "Guinness stout" }, { "strIngredient1": "Vanilla ice-cream" }, { "strIngredient1": "Chambord raspberry liqueur" }, { "strIngredient1": "Jim Beam" }, { "strIngredient1": "Godiva liqueur" }, { "strIngredient1": "Fruit punch" }, { "strIngredient1": "Baileys irish cream" }, { "strIngredient1": "Zima" }, { "strIngredient1": "Blue Curacao" }, { "strIngredient1": "Coca-Cola" }, { "strIngredient1": "Maui" }, { "strIngredient1": "Frangelico" }, { "strIngredient1": "Bacardi Limon" }, { "strIngredient1": "Raspberry vodka" }, { "strIngredient1": "Green Creme de Menthe" }, { "strIngredient1": "Lemon peel" }, { "strIngredient1": "Prosecco" }, { "strIngredient1": "White Rum" }, { "strIngredient1": "Mezcal" }, { "strIngredient1": "Green Chartreuse" }, { "strIngredient1": "Grape Soda" }, { "strIngredient1": "Hot Chocolate" }, { "strIngredient1": "Blended Scotch" }, { "strIngredient1": "Rye whiskey"}]';
 
-    var dataObject = JSON.parse(dataJSON);
+var dataObject = JSON.parse(dataJSON);
 
-    function compareStrings(a, b) {
-        a = a.toLowerCase();
-        b = b.toLowerCase();
+function compareStrings(a, b) {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
 
-        return (a < b) ? -1 : (a > b) ? 1 : 0;
-    }
+    return (a < b) ? -1 : (a > b) ? 1 : 0;
+}
 
-    dataObject.sort(function (a, b) {
-        return compareStrings(a.strIngredient1, b.strIngredient1);
-    })
+dataObject.sort(function (a, b) {
+    return compareStrings(a.strIngredient1, b.strIngredient1);
+})
 
 
-    var listItemString = $('#ingredList').html();
+var listItemString = $('#ingredList').html();
 
-    dataObject.forEach(buildNewList);
+dataObject.forEach(buildNewList);
+
 
     function buildNewList(item, _index) {
         var listItem = $("<li>" + listItemString + "</li>");
@@ -303,89 +496,90 @@ $(document).ready(function () {
     }
 
 
-    //  ----- Search Menu Section 
 
-    $("#mySearch").on("keyup", searchFunction);
+//  ----- Search Menu Section 
 
-
-    function searchFunction() {
+$("#mySearch").on("keyup", searchFunction);
 
 
-        // Declare variables
-        var input, filter, ul, li, a, i;
-        input = document.getElementById("mySearch");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("ingredMenu");
-        li = ul.getElementsByTagName("li");
+function searchFunction() {
 
-        console.log(li);
 
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "block";
-            } else {
-                li[i].style.display = "none";
-            }
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("mySearch");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("ingredMenu");
+    li = ul.getElementsByTagName("li");
+
+    console.log(li);
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "block";
+        } else {
+            li[i].style.display = "none";
         }
     }
+}
 
-    // ----- Render Ingredient Button Section 
-
-
-    function renderButtons() {
-
-        // this is necessary otherwise you will have repeat buttons
-        $("#buttons-view").empty();
-
-        // Looping through the array of ingredients
-        for (var i = 0; i < ingredients.length; i++) {
-
-            // Then dynamicaly generating buttons for each ingredient in the array
-            var a = $("<button>");
-            // Adding a data-attribute
-            a.attr("data-name", ingredients[i]);
-            // Adding a data-attribute
-            a.attr("id", "ingredButton");
-            a.addClass("btn btn-primary");
-            // Providing the initial button text
-            a.text(ingredients[i]);
-            // Adding the button to the buttons-view div
-            $("#buttons-view").append(a);
-        }
-    }
-
-    // This function handles events where an ingredient button is clicked
-    $(".ingred").on("click", function (event) {
-
-        event.preventDefault();
-
-        // This line grabs the value from the clicked ingredient
-        var ingredient = $(this).text();
-
-        // Adding ingredient from the textbox to our array
-        ingredients.push(ingredient);
-
-        // Calling renderButtons which handles the processing of our ingredients array
-        renderButtons();
-    });
+// ----- Render Ingredient Button Section 
 
 
-    // ----- Remove Ingredient Button Section
+function renderButtons() {
 
-    function removeButtons() {
-        $(this).remove();
+    // this is necessary otherwise you will have repeat buttons
+    $("#buttons-view").empty();
 
-        var indexValue = $(this).attr("data-name");
-        var index = ingredients.indexOf(indexValue);
+    // Looping through the array of ingredients
+    for (var i = 0; i < ingredients.length; i++) {
 
-        if (index > -1) {
-            ingredients.splice(index, 1);
-        }
+        // Then dynamicaly generating buttons for each ingredient in the array
+        var a = $("<button>");
+        // Adding a data-attribute
+        a.attr("data-name", ingredients[i]);
+        // Adding a data-attribute
+        a.attr("id", "ingredButton");
+        a.addClass("btn btn-primary");
+        // Providing the initial button text
+        a.text(ingredients[i]);
+        // Adding the button to the buttons-view div
+        $("#buttons-view").append(a);
     };
+};
 
-    $(document).on("click", "#ingredButton", removeButtons);
+// This function handles events where an ingredient button is clicked
+$(".ingred").on("click", function (event) {
+
+    event.preventDefault();
+
+    // This line grabs the value from the clicked ingredient
+    var ingredient = $(this).text();
+
+    // Adding ingredient from the textbox to our array
+    ingredients.push(ingredient);
+
+    // Calling renderButtons which handles the processing of our ingredients array
+    renderButtons();
+});
+
+
+// ----- Remove Ingredient Button Section
+
+function removeButtons() {
+    $(this).remove();
+
+    var indexValue = $(this).attr("data-name");
+    var index = ingredients.indexOf(indexValue);
+
+    if (index > -1) {
+        ingredients.splice(index, 1);
+    };
+};
+
+$(document).on("click", "#ingredButton", removeButtons);
 
 });
 

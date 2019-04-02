@@ -1,14 +1,71 @@
-.card {
-  margin: 10px auto;
-  padding: 5px;
-  width: 70%;
-  float: left;
-  width: 33.33%;
-}
-.modal-content{
-  padding: 5%;
+body{
+  font-family: 'Germania One', cursive;
+  background-color: rgb(129, 255, 129);
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png"); 
 }
 
+h1{
+ font-size: 48px;
+}
+
+h2{
+  font-size: 32px;
+  margin-top: 30px;
+}
+
+h3{
+  font-size: 24px;
+}
+
+p{
+ font-size: 18px;
+ color: darkgrey;
+}
+
+.column_lime{
+  background-color: rgb(129, 255, 129);
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
+}
+
+.column_white{
+  background-color: white;
+}
+
+
+.card {
+  margin: 10px;
+  padding: 20px;
+  float: left;
+  width: 300px;
+  height: 400px;
+}
+
+
+.thumbnailImage {
+  weight: 200px;
+  height: 300px;
+}
+
+
+.modal-content{
+  padding: 5%;
+  border:none;
+}
+
+.instruction_list{
+  color: darkgray;
+}
+
+/* Style for the search box */
+#jumbotron_heading {
+  /* background-color: cyan; */
+  /* background-image: url(/assets/images/argyle.png); */
+  
+  margin-bottom: 0px;
+  background-color: cyan;
+  color: salmon;
+
+}
 /* Style for the search box */
 #mySearch {
     width: 100%;
@@ -38,8 +95,10 @@
     background-color: #eee;
   }
 
-  
   /* Style for the buttons */
   #ingredButton {
-    margin: 6px;
+    margin-top: 15px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom:20px;
   }
