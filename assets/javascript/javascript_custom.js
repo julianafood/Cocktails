@@ -1,68 +1,75 @@
 $(document).ready(function () {
 
+
     var ingredients = [];
     var selectedIngredients = ingredients;
     var selectedDrinkId = "";
     var APIKey = "8673533";
+    var drinkNameForGiphy = "";
 
 
     $("#submit").on("click", function () {
         $("#drink-output").empty();
+
         // Here we are building the URL we need to query the database
-        var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
-        // Here we run our AJAX call to the OpenWeatherMap API
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-            // We store all of the retrieved data inside of an object called "response"
-            .then(function (response) {
-                // Log the queryURL
-                console.log(queryURL);
-                // Log the resulting object
-                console.log(response);
-                //console.log(response.drinks[0]);
-                var results = response.drinks;
-                for (var i = 0; i < results.length; i++) {
-                    // Creating and storing a div tag
-                    var drinkThumbnailDiv = $("<div>");
-                    drinkThumbnailDiv.addClass("card");
-                    // Creating an h3 tag with the result item's name
-                    var h3 = $("<h3>").text(results[i].strDrink);
-                    // Creating and storing an image tag
-                    var drinkThumbnailImage = $("<img>");
-                    drinkThumbnailImage.addClass("thumbnailImage");
-                    drinkThumbnailImage.attr("drinkID", results[i].idDrink);
-                    // Setting the src attribute of the image to a property pulled off the result item
-                    drinkThumbnailImage.attr("src", results[i].strDrinkThumb);
-                    console.log(drinkThumbnailImage);
-                    // Appending the paragraph and image tag to the emotionDiv
-                    drinkThumbnailDiv.append(h3);
-                    drinkThumbnailDiv.append(drinkThumbnailImage);
-                    // Prependng the emotionDiv to the HTML page in the "#gif-output" div
-                    $("#drink-output").append(drinkThumbnailDiv);
-                }
+
+  var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
+  // Here we run our AJAX call to the OpenWeatherMap API
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+  })
+      // We store all of the retrieved data inside of an object called "response"
+      .then(function (response) {
+          // Log the queryURL
+          console.log(queryURL);
+          // Log the resulting object
+          console.log(response);
+          //console.log(response.drinks[0]);
+          var results = response.drinks;
+          for (var i = 0; i < results.length; i++) {
+              // Creating and storing a div tag
+              var drinkThumbnailDiv = $("<div>");
+              drinkThumbnailDiv.addClass("card");
+              // Creating an h3 tag with the result item's name
+              var h3 = $("<h3>").text(results[i].strDrink);
+              h3.addClass("text-center");
+              // Creating and storing an image tag
+              var drinkThumbnailImage = $("<img>");
+              drinkThumbnailImage.addClass("thumbnailImage");
+              drinkThumbnailImage.attr("drinkID", results[i].idDrink);
+              drinkThumbnailImage.attr("width", "100%");
+              // Setting the src attribute of the image to a property pulled off the result item
+              drinkThumbnailImage.attr("src", results[i].strDrinkThumb);
+              console.log(drinkThumbnailImage);
+              // Appending the paragraph and image tag to the emotionDiv
+              drinkThumbnailDiv.append(h3);
+              drinkThumbnailDiv.append(drinkThumbnailImage);
+              // Prependng the emotionDiv to the HTML page in the "#gif-output" div
+              $("#drink-output").append(drinkThumbnailDiv);
+          }
 
 
 
-                $(".thumbnailImage").on("click", function () {
-                    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                    //var state = $(this).attr("data-state");
-                    console.log("working");
+          $(".thumbnailImage").on("click", function() {
+            // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+            //var state = $(this).attr("data-state");
+            console.log("working");
+      
+            $("#exampleModal").modal("show");
+      
+            selectedDrinkId = $(this).attr("drinkID");
+            console.log(selectedDrinkId);
+      
+            openDrinkInfo();
+      
+          });
+      });
+  });
 
-                    $("#exampleModal").modal("show");
 
-                    selectedDrinkId = $(this).attr("drinkID");
-                    console.log(selectedDrinkId);
+      function openDrinkInfo() {
 
-                    openDrinkInfo();
-
-                });
-            });
-    });
-
-
-    function openDrinkInfo() {
         var querySecondURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/lookup.php?i=" + selectedDrinkId;
         $("#ModalLabel").empty();
         $("#imageDiv").empty();
@@ -73,6 +80,7 @@ $(document).ready(function () {
             url: querySecondURL,
             method: "GET"
         })
+
             // We store all of the retrieved data inside of an object called "response"
             .then(function (response) {
                 // Log the queryURL
@@ -174,11 +182,47 @@ $(document).ready(function () {
                 console.log(drinkModalDiv);
                 console.log($("#modal-info"));
 
-
+                drinkGiphy();
 
             });
 
-    }
+      }
+                  
+       function drinkGiphy() {
+
+          $("#drink-giphy").empty();
+
+          var topic = drinkNameForGiphy;
+
+          var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
+          console.log(topic);
+          console.log(queryURL);
+          $.ajax({
+          url: queryURL,
+          method: "GET"
+          }).then(function(response) {
+
+            //store the reponse data in a variable
+            var results = response.data;
+
+            // console.log test
+            console.log(results);
+
+            // new storage area for the drink Giphy
+            var drinkGiphyDiv = $("<div>");
+
+            // create and store the giphy
+            var drinkTopic = $("<img>");
+            drinkTopic.attr("src", results[0].images.fixed_width.url);
+
+            // append to the new div
+            drinkGiphyDiv.append(drinkTopic);
+
+            $("#drink-giphy").append(drinkGiphyDiv);
+        
+        }); 
+  }
+
 
 
     // ------ Add ingredients to search menu section /
