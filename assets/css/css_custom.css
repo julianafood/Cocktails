@@ -1,14 +1,63 @@
-.card {
-  margin: 10px auto;
-  padding: 5px;
-  width: 70%;
-  float: left;
-  width: 33.33%;
+body{
+  font-family: 'Germania One', cursive;
+  background-color: rgb(129, 255, 129);
 }
+
+h1{
+ font-size: 36px;
+}
+
+h2{
+  font-size: 30px;
+}
+
+h3{
+  font-size: 24px;
+}
+
+p{
+ font-size: 18px;
+ color: darkgrey;
+}
+
+.column_lime{
+  background-color: rgb(129, 255, 129);
+}
+
+.column_white{
+  background-color: white;
+}
+
+
+.card {
+  margin: 10px;
+  padding: 20px;
+  float: left;
+  width: 300px;
+  height: 400px;
+}
+
+
+.thumbnailImage {
+  weight: 200px;
+  height: 300px;
+}
+
+
 .modal-content{
   padding: 5%;
 }
 
+.instruction_list{
+  color: darkgray;
+}
+
+/* Style for the search box */
+#jumbotron_heading {
+  background-color: cyan;
+  color: salmon;
+  margin-bottom: 0px;
+}
 /* Style for the search box */
 #mySearch {
     width: 100%;
@@ -38,8 +87,9 @@
     background-color: #eee;
   }
 
-  
   /* Style for the buttons */
   #ingredButton {
-    margin: 6px;
+    margin-top: 20px;
+    margin-left: 6px;
+    margin-right: 6px;
   }
