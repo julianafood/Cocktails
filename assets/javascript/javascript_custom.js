@@ -29,10 +29,12 @@ $(document).ready(function () {
               drinkThumbnailDiv.addClass("card");
               // Creating an h3 tag with the result item's name
               var h3 = $("<h3>").text(results[i].strDrink);
+              h3.addClass("text-center");
               // Creating and storing an image tag
               var drinkThumbnailImage = $("<img>");
               drinkThumbnailImage.addClass("thumbnailImage");
               drinkThumbnailImage.attr("drinkID", results[i].idDrink);
+              drinkThumbnailImage.attr("width", "100%");
               // Setting the src attribute of the image to a property pulled off the result item
               drinkThumbnailImage.attr("src", results[i].strDrinkThumb);
               console.log(drinkThumbnailImage);
