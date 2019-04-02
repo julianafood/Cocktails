@@ -198,7 +198,7 @@ $(document).ready(function () {
                 $("#drinkInstructions").append(drinkInstructions);
 
 
-                drinkGiphy();
+                //drinkGiphy();
 
 
                 // Section to add dynamically add spotify url to modal
