@@ -133,40 +133,214 @@ $(document).ready(function () {
                 console.log(results[0].strIngredient1);
                 console.log(results[0].strIngredient2);
                 console.log(results[0].strIngredient3);
-                if ((results[0].strIngredient1 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky")) || (results[0].strIngredient2 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky")) || (results[0].strIngredient3 == ("Bourbon" || "Blended whiskey" || "Rye whisky" || "Whiskey" || "Whisky"))) {
+                console.log(results[0].strIngredient4);
+                console.log(results[0].strIngredient5);
+
+
+                switch (results[0].strIngredient1.trim()) {
+                    case ("Bourbon"):
+                    case ("Blended whiskey"):
+                    case ("Rye whisky"):
+                    case ("Whiskey"):
+                    case ("Whisky"):
+                    case ("151 proof rum"):
                     console.log("country music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
-                }
-                else if ((results[0].strIngredient1 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka")) || (results[0].strIngredient2 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka")) || (results[0].strIngredient3 == ("Absolut Vodka" || "Cranberry vodka" || "Lemon vodka" || "Peach vodka" || "Raspberry vodka" || "Vanilla vodka" || "Vodka"))) {
+                    break; 
+                    case ("Absolut Vodka"):
+                    case ("Vodka"):
                     console.log("russian music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
-                }
-                else if ((results[0].strIngredient1 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum" || "Rum" || "Spiced rum" || "White Rum")) || (results[0].strIngredient2 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum" || "Rum" || "Spiced rum" || "White Rum")) || (results[0].strIngredient3 == ("151 proof rum" || "Añejo rum" || "Coconut rum" || "Dark rum" || "Light rum" || "Malibu rum" || "Rum" || "Spiced rum" || "White Rum"))) {
+                    break;
+                    case ("Coconut rum"):
+                    case ("Light rum"):
+                    case ("Malibu rum"):
+                    case ("Rum"):
+                    case ("Spiced rum"):
+                    case ("White Rum"):
                     console.log("reggae music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
-                }
-                else if (((results[0].strIngredient1) == ("Tequila")) || ((results[0].strIngredient2) == ("Tequila")) || ((results[0].strIngredient3) == ("Tequila"))) {
+                    break;
+                    case("Tequila"):
+                    case("Mezcal"):
+                    case ("Dark rum"):
+                    case ("Añejo rum"):
                     console.log("latin music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
-                }
-                else if (((results[0].strIngredient1) == ("Gin")) || ((results[0].strIngredient2) == ("Gin")) || ((results[0].strIngredient3) == ("Gin"))) {
+                    break;
+                    case("Gin"):
+                    case("Blended Scotch"):
+                    case("Scotch"):
+                    case("Champagne"):
+                    case("Cognac"):
                     console.log("jazz music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
-                }
-                else if (((results[0].strIngredient1) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy")) || ((results[0].strIngredient2) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy")) || ((results[0].strIngredient3) == ("Apple brandy" || "Apricot brandy" || "Blackberry brandy" || "Brandy" || "Cherry Brandy"))) {
+                    break;
+                    case ("Apple brandy"):
+                    case ("Apricot brandy"):
+                    case ("Blackberry brandy"):
+                    case ("Brandy"): 
+                    case ("Cherry brandy"):
+                    case ("Cranberry vodka"):
+                    case ("Lemon vodka"):
+                    case ("Peach vodka"):
+                    case ("Raspberry vodka"):
+                    case ("Vanilla vodka"):
+                    case ("Absolut Citron"):
+                    case ("Absolut Kurant"):
+                    case ("Amaretto"):
+                    case ("Bacardi Limon"):
+                    case ("Blue Curacao"):
                     console.log("80's music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
-                }
-                else if (((results[0].strIngredient1) == ("Cachaca")) || ((results[0].strIngredient2) == ("Cachaca")) || ((results[0].strIngredient3) == ("Cachaca"))) {
+                    break;
+                    case("Cachaca"):
                     console.log("samba music");
                     $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
-                }
-                else {
-                    console.log("throwback music");
-                    $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX8ky12eWIvcW");
+                    break;
+                    default: 
+                    console.log("1st round no match");
+                    secondIteration();
+                  };
+
+                function secondIteration(){
+                    switch (results[0].strIngredient2) {
+                        case ("Bourbon"):
+                        case ("Blended whiskey"):
+                        case ("Rye whisky"):
+                        case ("Whiskey"):
+                        case ("Whisky"):
+                        case ("151 proof rum"):
+                        console.log("country music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
+                        break; 
+                        case ("Absolut Vodka"):
+                        case ("Vodka"):
+                        console.log("russian music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
+                        break;
+                        case ("Coconut rum"):
+                        case ("Light rum"):
+                        case ("Malibu rum"):
+                        case ("Rum"):
+                        case ("Spiced rum"):
+                        case ("White Rum"):
+                        console.log("reggae music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
+                        break;
+                        case("Tequila"):
+                        case("Mezcal"):
+                        case ("Dark rum"):
+                        case ("Añejo rum"):
+                        console.log("latin music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
+                        break;
+                        case("Gin"):
+                        case("Blended Scotch"):
+                        case("Scotch"):
+                        case("Champagne"):
+                        case("Cognac"):
+                        console.log("jazz music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
+                        break;
+                        case ("Apple brandy"):
+                        case ("Apricot brandy"):
+                        case ("Blackberry brandy"):
+                        case ("Brandy"): 
+                        case ("Cherry brandy"):
+                        case ("Cranberry vodka"):
+                        case ("Lemon vodka"):
+                        case ("Peach vodka"):
+                        case ("Raspberry vodka"):
+                        case ("Vanilla vodka"):
+                        case ("Absolut Citron"):
+                        case ("Absolut Kurant"):
+                        case ("Amaretto"):
+                        case ("Bacardi Limon"):
+                        case ("Blue Curacao"):
+                        console.log("80's music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
+                        break;
+                        case("Cachaca"):
+                        console.log("samba music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
+                        break;
+                        default:
+                        console.log("2nd round no match");
+                        thirdIteration();
+                      };
+
                 };
 
+                function thirdIteration(){
+                    switch (results[0].strIngredient3) {
+                        case ("Bourbon"):
+                        case ("Blended whiskey"):
+                        case ("Rye whisky"):
+                        case ("Whiskey"):
+                        case ("Whisky"):
+                        case ("151 proof rum"):
+                        console.log("country music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6P1Nsk3wSZX");
+                        break; 
+                        case ("Absolut Vodka"):
+                        case ("Vodka"):
+                        console.log("russian music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/6d3Zwzras2ghumJvnlIqsI");
+                        break;
+                        case ("Coconut rum"):
+                        case ("Light rum"):
+                        case ("Malibu rum"):
+                        case ("Rum"):
+                        case ("Spiced rum"):
+                        case ("White Rum"):
+                        console.log("reggae music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DXbSbnqxMTGx9");
+                        break;
+                        case("Tequila"):
+                        case("Mezcal"):
+                        case ("Dark rum"):
+                        case ("Añejo rum"):
+                        console.log("latin music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX6ThddIjWuGT");
+                        break;
+                        case("Gin"):
+                        case("Blended Scotch"):
+                        case("Scotch"):
+                        case("Champagne"):
+                        case("Cognac"):
+                        console.log("jazz music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4wta20PHgwo");
+                        break;
+                        case ("Apple brandy"):
+                        case ("Apricot brandy"):
+                        case ("Blackberry brandy"):
+                        case ("Brandy"): 
+                        case ("Cherry brandy"):
+                        case ("Cranberry vodka"):
+                        case ("Lemon vodka"):
+                        case ("Peach vodka"):
+                        case ("Raspberry vodka"):
+                        case ("Vanilla vodka"):
+                        case ("Absolut Citron"):
+                        case ("Absolut Kurant"):
+                        case ("Amaretto"):
+                        case ("Bacardi Limon"):
+                        case ("Blue Curacao"):
+                        console.log("80's music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX4UtSsGT1Sbe");
+                        break;
+                        case("Cachaca"):
+                        console.log("samba music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/22sifzjxojdf7narj6o6fszmq/playlist/5xur4LYdlOdcxWAWxfr9Mi");
+                        break;
+                        default:
+                        console.log("3rd round no match");
+                        console.log("throwback music");
+                        $('#spotifyPlay').attr("src", "https://open.spotify.com/embed/user/spotify/playlist/37i9dQZF1DX8ky12eWIvcW");
+                      };
 
+                };
 
 
                 drinkInstructions.append(instructions);
