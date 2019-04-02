@@ -423,13 +423,16 @@ $(document).ready(function () {
                     var topic = results[0].strDrink;
                     console.log(topic);
         
-                    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
+                    var queryGiphyURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
+
+                    var encodedGiphyURL = encodeURI(queryGiphyURL);
                     console.log(topic);
-                    console.log(queryURL);
+                    console.log(queryGiphyURL);
                     $.ajax({
-                        url: queryURL,
+                        url: encodedGiphyURL,
                         method: "GET"
-                    }).then(function (response) {
+                    })
+                    .then(function (response) {
         
                         //store the reponse data in a variable
                         var results = response.data;
@@ -452,8 +455,47 @@ $(document).ready(function () {
                     });
                                           
                 };
-
                 drinkGiphy();
+
+                function wikiDrinkSearch () {
+
+                    $("#drink-wiki").empty();
+
+                    var searchTopic = results[0].strDrink  //drinkNameForGiphy;
+                    var wikiSearchURL = "https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=" + searchTopic;
+                    var encodedWikiURL = encodeURI(wikiSearchURL);
+                    // console.log(searchTopic);
+                    console.log(searchTopic);
+                    console.log(encodedWikiURL);
+
+                    $.ajax({
+                    url: encodedWikiURL,
+                    method: "GET"
+                    }).then(function(response) {
+
+                        //store the repsonse data in a variable called results
+                        var results = response;
+
+                        //console.log test
+                        console.log(results);
+
+                        // new storage area for wiki snippet
+                        var drinkWikiDiv = $("<div>");
+
+                        //create and store the wiki snippet
+                        var drinkSnippet = $("<p>");
+                        drinkSnippet.html(results.query.search[0].snippet);
+
+                        //append the wiki snippet
+                        drinkWikiDiv.append(drinkSnippet);
+
+                        $("#drink-wiki").append(drinkWikiDiv);
+
+                    });
+                }
+                wikiDrinkSearch();
+
+
 
             });
 
