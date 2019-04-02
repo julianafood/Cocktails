@@ -46,6 +46,7 @@ p{
 
 .modal-content{
   padding: 5%;
+  border:none;
 }
 
 .instruction_list{
