@@ -1,13 +1,16 @@
 $(document).ready(function () {
 
+
     var ingredients = [];
     var selectedIngredients = ingredients;
     var selectedDrinkId = "";
     var APIKey = "8673533";
+    var drinkNameForGiphy = "";
 
 
     $("#submit").on("click", function () {
         $("#drink-output").empty();
+
         // Here we are building the URL we need to query the database
 
   var queryURL = "https://www.thecocktaildb.com/api/json/V2/" + APIKey + "/filter.php?i=" + selectedIngredients;
@@ -77,6 +80,7 @@ $(document).ready(function () {
             url: querySecondURL,
             method: "GET"
         })
+
             // We store all of the retrieved data inside of an object called "response"
             .then(function (response) {
                 // Log the queryURL
@@ -178,11 +182,47 @@ $(document).ready(function () {
                 console.log(drinkModalDiv);
                 console.log($("#modal-info"));
 
-
+                drinkGiphy();
 
             });
 
-    }
+      }
+                  
+       function drinkGiphy() {
+
+          $("#drink-giphy").empty();
+
+          var topic = drinkNameForGiphy;
+
+          var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=R9u5VRTU7cYZI9IK69QVVKAHL3j5Fj0O&q=" + topic + "&limit=1&offset=0&lang=en";
+          console.log(topic);
+          console.log(queryURL);
+          $.ajax({
+          url: queryURL,
+          method: "GET"
+          }).then(function(response) {
+
+            //store the reponse data in a variable
+            var results = response.data;
+
+            // console.log test
+            console.log(results);
+
+            // new storage area for the drink Giphy
+            var drinkGiphyDiv = $("<div>");
+
+            // create and store the giphy
+            var drinkTopic = $("<img>");
+            drinkTopic.attr("src", results[0].images.fixed_width.url);
+
+            // append to the new div
+            drinkGiphyDiv.append(drinkTopic);
+
+            $("#drink-giphy").append(drinkGiphyDiv);
+        
+        }); 
+  }
+
 
 
     // ------ Add ingredients to search menu section /
