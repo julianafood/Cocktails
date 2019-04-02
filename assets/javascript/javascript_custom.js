@@ -98,9 +98,8 @@ $(document).ready(function () {
                 var drinkInstructions = $("<div>");
 
                 var drinkName = $("<h3>").text(results[0].strDrink);
-                var glassType = $("<p>").text("Glass Type: " + results[0].strGlass);
+                var glassType = $("<p>").text(results[0].strGlass);
                 var instructions = $("<p>").text(results[0].strInstructions);
-
                 var ingredients1 = $("<p>").text(results[0].strMeasure1 + " " + results[0].strIngredient1);
                 var ingredients2 = $("<p>").text(results[0].strMeasure2 + " " + results[0].strIngredient2);
                 var ingredients3 = $("<p>").text(results[0].strMeasure3 + " " + results[0].strIngredient3);
@@ -116,7 +115,13 @@ $(document).ready(function () {
                 drinkModalImage.attr("src", results[0].strDrinkThumb);
                 drinkModalImage.attr("width", "100%");
 
+                var textGlass = $("<h3>");
+                textGlass.html("Drink Glass:");
+                modalContent.append(textGlass);
                 modalContent.append(glassType);
+                var textRecipe = $("<h3>");
+                textRecipe.html("Drink Recipe:");
+                modalContent.append(textRecipe);
                 modalContent.append(ingredients1);
                 modalContent.append(ingredients2);
                 modalContent.append(ingredients3);
@@ -127,8 +132,25 @@ $(document).ready(function () {
                 modalContent.append(ingredients8);
                 modalContent.append(ingredients9);
                 modalContent.append(ingredients10);
+        
 
                 //modalContent.append(drinkModalImage);
+                drinkInstructions.append(instructions);
+                //The header for the modal
+                $("#ModalLabel").append(drinkName);
+                //Appending the image to the image div section of the modal
+                $("#imageDiv").append(drinkModalImage);
+                //Appending the ingredients list (glass type and indredients and their respective quantities)
+                $("#ingredientsList").append(modalContent);
+                //appending the drink instructions to the respective section div of the modal
+                var instructionText = $("<h3>");
+                instructionText.html("Drink Instructions:");
+                $("#drinkInstructions").append(instructionText);
+                $("#drinkInstructions").append(drinkInstructions);
+
+                console.log(drinkModalDiv);
+                console.log($("#modal-info"));
+
 
                 // Section to add dynamically add spotify url to modal
                 console.log(results[0].strIngredient1);
@@ -343,18 +365,6 @@ $(document).ready(function () {
 
                 };
 
-                drinkInstructions.append(instructions);
-                //The header for the modal
-                $("#ModalLabel").append(drinkName);
-                //Appending the image to the image div section of the modal
-                $("#imageDiv").append(drinkModalImage);
-                //Appending the ingredients list (glass type and indredients and their respective quantities)
-                $("#ingredientsList").append(modalContent);
-                //appending the drink instructions to the respective section div of the modal
-                $("#drinkInstructions").append(drinkInstructions);
-
-                console.log(drinkModalDiv);
-                console.log($("#modal-info"));
 
                 // Drink GIF section 
                 function drinkGiphy() {
